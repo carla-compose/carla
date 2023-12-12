@@ -3,13 +3,9 @@ FROM nvidia/cuda:11.3.1-runtime-ubuntu20.04
 
 USER root
 
-ARG EPIC_USER=christiangeller
-ARG EPIC_PASS=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
+ARG EPIC_USER
+ARG EPIC_PASS
 ENV DEBIAN_FRONTEND=noninteractive
-
-# TODO: DELETE
-RUN echo $EPIC_USER
-RUN echo $EPIC_PASS
 
 # Install dependencies
 RUN apt-get update ; \
