@@ -3,8 +3,8 @@ FROM nvidia/cuda:11.3.1-runtime-ubuntu20.04
 
 USER root
 
-ARG EPIC_USER
-ARG EPIC_PASS
+ARG EPIC_USER=user
+ARG EPIC_PASS=pass
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install dependencies
