@@ -19,9 +19,6 @@ jobs:
         name: Build and push
         with:
           file: Util/Docker/Prerequisites.Dockerfile
-          build-args: 
-            EPIC_USER=${{ secrets.EPIC_USER }}
-            EPIC_PASS=${{ secrets.EPIC_PASS }}
           tags: carla-prerequisites
           outputs: type=docker,dest=/tmp/carla-prerequisites.tar
       - uses: actions/upload-artifact@v3
