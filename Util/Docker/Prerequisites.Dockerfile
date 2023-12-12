@@ -45,6 +45,11 @@ RUN apt-get update ; \
     git \
     aria2
 
+# Install pip for python 3.10
+RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
+    python3.10 get-pip.py && \
+    rm get-pip.py
+
 # Install Python Packages
 RUN pip3.10 install -Iv setuptools==47.3.1 && \
   pip3.10 install distro && \
