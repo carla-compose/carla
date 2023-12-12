@@ -15,8 +15,7 @@ RUN echo $EPIC_PASS
 RUN apt-get update ; \
   apt-get install -y wget software-properties-common && \
   add-apt-repository ppa:ubuntu-toolchain-r/test && \
-  wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|apt-key add - && \
-  apt-add-repository "deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-8 main" && \
+  add-apt-repository ppa:deadsnakes/ppa && \  # add newer Python version
   apt-get update ; \
   apt-get install -y build-essential \
     libglvnd-dev \
@@ -28,10 +27,10 @@ RUN apt-get update ; \
     libvulkan1 \
     libvulkan-dev \
     vulkan-tools \
-    python3 \
-    python3-dev \
-    python3-pip \
-    python3-distutils \
+    python3.10 \
+    python3.10-dev \
+    python3.10-pip \
+    python3.10-distutils \
     libpng-dev \
     libtiff5-dev \
     libjpeg-dev \
@@ -48,13 +47,15 @@ RUN apt-get update ; \
     aria2
 
 # Install Python Packages
-RUN pip3 install -Iv setuptools==47.3.1 && \
-  pip3 install distro && \
-  pip3 install pygame && \
-  pip3 install numpy
+RUN pip3.10 install -Iv setuptools==47.3.1 && \
+  pip3.10 install distro && \
+  pip3.10 install pygame && \
+  pip3.10 install numpy
 
 # Set Alternatives and Defaults
-RUN update-alternatives --install /usr/bin/clang++ clang++ /usr/lib/llvm-8/bin/clang++ 180 && \
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1 && \
+  update-alternatives --set python3 /usr/bin/python3.10 && \
+update-alternatives --install /usr/bin/clang++ clang++ /usr/lib/llvm-8/bin/clang++ 180 && \
   update-alternatives --install /usr/bin/clang clang /usr/lib/llvm-8/bin/clang 180
 
 # Enable Vulkan support for NVIDIA GPUs
