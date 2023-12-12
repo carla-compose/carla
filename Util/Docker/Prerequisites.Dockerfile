@@ -29,7 +29,6 @@ RUN apt-get update ; \
     libglvnd-dev \
     python3.10 \
     python3.10-dev \
-    python3.10-pip \
     python3.10-distutils \
     libpng-dev \
     libtiff5-dev \
