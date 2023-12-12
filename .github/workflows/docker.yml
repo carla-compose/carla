@@ -60,11 +60,28 @@ jobs:
           image: cgellerac/carla-source
           output: /home/carla/Dist/*.tar.gz
           destination: /tmp/carla-package.tar.gz
+      - uses: shrink/actions-docker-extract@v3
+        name: extract PythonAPI package
+        with:
+          image: cgellerac/carla-source
+          output: /home/carla/PythonAPI
+          destination: /tmp/carla-python-api
       - uses: actions/upload-artifact@v3
-        name: Upload artifact
+        name: Upload carla-package artifact
         with:
           name: carla-package
           path: /tmp/carla-package.tar.gz
+      - uses: actions/upload-artifact@v3
+        name: Upload carla-python-api artifact
+        with:
+          name: carla-python-api
+          path: /tmp/carla-python-api
+      - uses: actions/upload-release-asset@v1
+        name: Upload Release Asset
+        id: upload-release-asset
+        with:
+          asset_path: /tmp/carla-python-api
+          asset_name: carla-python-api
 
   create-carla-image:
     name: create carla image
@@ -89,3 +106,4 @@ jobs:
           file: /build/Dockerfile
           context: /build
           tags: cgellerac/carla
+  
