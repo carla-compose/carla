@@ -17,7 +17,10 @@ jobs:
         name: Build and push
         with:
           file: Util/Docker/Prerequisites.Dockerfile
-          tags: cgellerac/carla-prerequisites
+          build-args: 
+            EPIC_USER=${{ secrets.EPIC_USER }}
+            EPIC_PASS=${{ secrets.EPIC_PASS }}
+          tags: carla-prerequisites
           outputs: type=docker,dest=/tmp/carla-prerequisites.tar
       - uses: actions/upload-artifact@v3
         name: Upload artifact
@@ -48,4 +51,6 @@ jobs:
         with:
           push: true
           file: Util/Docker/Carla.Dockerfile
+          build-args:
+            GIT_PASS=
           tags: cgellerac/carla-source
