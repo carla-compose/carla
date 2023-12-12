@@ -15,10 +15,9 @@ RUN echo $EPIC_PASS
 RUN apt-get update ; \
   apt-get install -y wget software-properties-common && \
   add-apt-repository ppa:ubuntu-toolchain-r/test && \
-  add-apt-repository ppa:deadsnakes/ppa && \  # add newer Python version
+  add-apt-repository ppa:deadsnakes/ppa && \
   apt-get update ; \
   apt-get install -y build-essential \
-    libglvnd-dev \
     clang-8 \
     lld-8 \
     g++-7 \
@@ -27,6 +26,7 @@ RUN apt-get update ; \
     libvulkan1 \
     libvulkan-dev \
     vulkan-tools \
+    libglvnd-dev \
     python3.10 \
     python3.10-dev \
     python3.10-pip \
@@ -43,7 +43,6 @@ RUN apt-get update ; \
     rsync \
     libxml2-dev \
     git \
-    nano \
     aria2
 
 # Install Python Packages
