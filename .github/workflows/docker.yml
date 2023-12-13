@@ -52,7 +52,7 @@ jobs:
         id: extract_carla_package
         with:
           image: cgellerac/carla-source
-          path: /home/carla/Dist/*.tar.gz # TODO: check if valid
+          path: /home/carla/Dist
           destination: /tmp/
 
       - uses: actions/upload-artifact@v3
