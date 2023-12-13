@@ -15,7 +15,3 @@ RUN cd /home/carla/carla && \
   make package
 
 WORKDIR /home/carla/carla
-
-COPY entrypoint.sh /usr/bin/
-ENTRYPOINT ["/usr/bin/entrypoint.sh"]
-CMD [""]
