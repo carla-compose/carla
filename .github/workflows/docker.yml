@@ -10,11 +10,6 @@ jobs:
     steps:
       - uses: docker/setup-buildx-action@v3
         name: Set up Docker Buildx
-      - uses: docker/login-action@v3
-        name: Login to Docker Hub
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
       - uses: docker/build-push-action@v5
         name: Build and push
         with:
@@ -23,26 +18,12 @@ jobs:
             EPIC_USER=${{ secrets.EPIC_USER }}
             EPIC_PASS=${{ secrets.EPIC_PASS }}
           tags: carla-prerequisites
-          outputs: type=docker,dest=/tmp/carla-prerequisites.tar
-      - uses: actions/upload-artifact@v3
-        name: Upload artifact
-        with:
-          name: carla-prerequisites
-          path: /tmp/carla-prerequisites.tar
 
   create-carla-source-image:
     name: create carla source image
     runs-on: self-hosted
+    needs: create-carla-prerequisites-image
     steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: carla-prerequisites
-          path: /tmp
-      - name: Load image
-        run: |
-          docker load --input /tmp/carla-prerequisites.tar
-          docker image ls -a    
       - uses: docker/login-action@v3
         name: Login to Docker Hub
         with:
@@ -56,49 +37,63 @@ jobs:
           tags: cgellerac/carla-source
       - uses: shrink/actions-docker-extract@v3
         name: extract carla package
+        id: extract_carla_package
         with:
           image: cgellerac/carla-source
           output: /home/carla/Dist/*.tar.gz
-          destination: /tmp/carla-package.tar.gz
-      - uses: shrink/actions-docker-extract@v3
-        name: extract PythonAPI package
-        with:
-          image: cgellerac/carla-source
-          output: /home/carla/PythonAPI
-          destination: /tmp/carla-python-api
+          destination: /tmp/
       - uses: actions/upload-artifact@v3
         name: Upload carla-package artifact
         with:
           name: carla-package
-          path: /tmp/carla-package.tar.gz
+          path: ${{ steps.extract_carla_package.outputs.destination }}
+      - uses: shrink/actions-docker-extract@v3
+        name: extract PythonAPI package
+        id: extract_python_api
+        with:
+          image: cgellerac/carla-source
+          output: /home/carla/PythonAPI
+          destination: /tmp/
       - uses: actions/upload-artifact@v3
         name: Upload carla-python-api artifact
         with:
           name: carla-python-api
-          path: /tmp/carla-python-api
+          path: ${{ steps.extract_python_api.outputs.destination }}
+      - uses: actions/create-release@v1
+        name: Create Release
+        id: create_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
       - uses: actions/upload-release-asset@v1
         name: Upload Release Asset
         id: upload-release-asset
         with:
-          asset_path: /tmp/carla-python-api
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ steps.extract_python_api.outputs.destination }}
           asset_name: carla-python-api
 
   create-carla-image:
     name: create carla image
     runs-on: self-hosted
+    needs: create-carla-source-image
     steps:
+      - uses: docker/login-action@v3
+        name: Login to Docker Hub
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
           name: carla-package
           path: /tmp
       - name: Extract artifact
-        run: tar -xvzf /tmp/carla-package.tar.gz -C /build 
-      - uses: docker/login-action@v3
-        name: Login to Docker Hub
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+        run: tar -xvzf /tmp/carla-package.tar.gz -C /build
       - uses: docker/build-push-action@v5
         name: Build and push
         with:
