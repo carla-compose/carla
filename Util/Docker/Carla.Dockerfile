@@ -13,8 +13,8 @@ RUN cd /home/carla/carla && \
 RUN cd /home/carla/carla && \
   make setup
 
-RUN cd /home/carla/carla && \
-  make CarlaUE4Editor
+#RUN cd /home/carla/carla && \
+#  make CarlaUE4Editor
   
 #RUN cd /home/carla/carla && \
 #  make PythonAPI ARGS="--python-version='3.10'" 

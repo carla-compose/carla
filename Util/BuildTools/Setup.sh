@@ -883,6 +883,8 @@ log "Debugging Output 3"
 
 CARLA_VERSION=$(get_git_repository_version)
 
+log "Debugging Output 4"
+
 log "CARLA version ${CARLA_VERSION}."
 
 VERSION_H_FILE=${LIBCARLA_ROOT_FOLDER}/source/carla/Version.h
