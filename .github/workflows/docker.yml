@@ -5,19 +5,19 @@ on: [push, pull_request]
 jobs:
 
   # create carla-prerequisites image
-  #create-carla-prerequisites-image:
-  #  name: Create carla-prerequisites image
-  #  runs-on: self-hosted
-  #  steps:
-  #
-  #    - uses: docker/build-push-action@v5
-  #      name: Build image
-  #      with:
-  #        file: Util/Docker/Prerequisites.Dockerfile
-  #        tags: carla-prerequisites
-  #        build-args: |
-  #          EPIC_USER=${{ secrets.EPIC_USER }}
-  #          EPIC_PASS=${{ secrets.EPIC_PASS }}
+  create-carla-prerequisites-image:
+    name: Create carla-prerequisites image
+    runs-on: self-hosted
+    steps:
+  
+      - uses: docker/build-push-action@v5
+        name: Build image
+        with:
+          file: Util/Docker/Prerequisites.Dockerfile
+          tags: carla-prerequisites
+          build-args: |
+            EPIC_USER=${{ secrets.EPIC_USER }}
+            EPIC_PASS=${{ secrets.EPIC_PASS }}
 
   # create and push carla-source image
   create-carla-source-image:

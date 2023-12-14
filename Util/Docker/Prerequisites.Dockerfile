@@ -23,6 +23,7 @@ RUN apt-get update ; \
     libvulkan-dev \
     vulkan-tools \
     libglvnd-dev \
+    python \
     python3.10 \
     python3.10-dev \
     python3.10-distutils \
@@ -54,7 +55,7 @@ RUN pip3.10 install -Iv setuptools==47.3.1 && \
 # Set Alternatives and Defaults
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1 && \
   update-alternatives --set python3 /usr/bin/python3.10 && \
-update-alternatives --install /usr/bin/clang++ clang++ /usr/lib/llvm-8/bin/clang++ 180 && \
+  update-alternatives --install /usr/bin/clang++ clang++ /usr/lib/llvm-8/bin/clang++ 180 && \
   update-alternatives --install /usr/bin/clang clang /usr/lib/llvm-8/bin/clang 180
 
 # Enable Vulkan support for NVIDIA GPUs
