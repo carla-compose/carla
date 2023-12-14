@@ -711,9 +711,14 @@ else
   rm -Rf ${PATCHELF_TAR}
   rm -Rf ${PATCHELF_SOURCE_DIR}
 fi
+log "Debugging Output 1"
 
 mkdir -p ${LIBCARLA_INSTALL_CLIENT_FOLDER}/bin/
 cp ${PATCHELF_EXE} ${LIBCARLA_INSTALL_CLIENT_FOLDER}/bin/
+log "Debugging Output 2"
+
+log "${USE_PYTORCH}"
+log "${USE_ROS2}"
 
 # ==============================================================================
 # -- Download libtorch and dependencies ----------------------------------------
@@ -874,6 +879,7 @@ fi
 # ==============================================================================
 # -- Generate Version.h --------------------------------------------------------
 # ==============================================================================
+log "Debugging Output 3"
 
 CARLA_VERSION=$(get_git_repository_version)
 
