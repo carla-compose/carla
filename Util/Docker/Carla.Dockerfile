@@ -5,7 +5,7 @@ ARG GIT_BRANCH
 USER carla
 WORKDIR /home/carla
 
-COPY . /home/carla/carla
+COPY --chown=carla . /home/carla/carla
 
 RUN cd /home/carla/carla && \
   ./Update.sh && \
