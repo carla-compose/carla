@@ -8,6 +8,8 @@ COPY --chown=carla . /home/carla/carla
 
 WORKDIR /home/carla/carla
 
+RUN pip3 install -Iv setuptools==47.3.1
+
 RUN ./Update.sh
 
 RUN make CarlaUE4Editor
