@@ -22,7 +22,7 @@ if [ ! -d "${FBX2OBJ_DEP_FOLDER}" ]; then
   echo "Unpacking..."
   mkdir -p "${FBX2OBJ_DEP_FOLDER}"
   unzip "${CARLA_DOCKER_UTILS_FOLDER}/${LIB_NAME}.zip" -d "${FBX2OBJ_DEP_FOLDER}"
-  rm "${CARLA_DOCKER_UTILS_FOLDER}/${LIB_NAME}.tar.gz"
+  rm "${CARLA_DOCKER_UTILS_FOLDER}/${LIB_NAME}.zip"
 
 fi
 
