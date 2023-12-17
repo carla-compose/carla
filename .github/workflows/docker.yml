@@ -25,9 +25,15 @@ jobs:
 
       - name: debug
         run: ls -la artifacts
+
+      - name: debug2
+        run: mkdir build
         
       - name: Extract artifact
         run: tar -xvzf artifacts/*.tar.gz -C build
+
+      - name: debug3
+        run: ls -la build
 
       - uses: docker/build-push-action@v5
         name: Build and push
