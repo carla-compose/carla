@@ -18,19 +18,13 @@ jobs:
           image: cgellerac/carla-source
           path: home/carla/carla/Dist
           destination: artifacts/
-
-      - name: test1
-        run: pwd
-
-      - name: test2
-        run: ls
-        
-      - name: test3
-        run: ls /tmp
-        
-      - name: test4
-        run: echo ${{ steps.extract_carla_package.outputs.destination }}
-        
+      
+      - uses: actions/upload-artifact@v3
+        name: Upload carla-package
+        with:
+          name: carla-package
+          path: artifacts/Dist
+          
       # provide carla-python-api
       - uses: shrink/actions-docker-extract@v3
         name: Extract carla-python-api
@@ -39,26 +33,6 @@ jobs:
           image: cgellerac/carla-source
           path: home/carla/carla/PythonAPI
           destination: artifacts/
-
-      - name: test5
-        run: pwd
-
-      - name: test6
-        run: ls
-        
-      - name: test7
-        run: ls /tmp 
-        
-      - name: test8
-        run: echo ${{ steps.extract_python_api.outputs.destination }}
-
-
-        
-      - uses: actions/upload-artifact@v3
-        name: Upload carla-package
-        with:
-          name: carla-package
-          path: artifacts/Dist
 
       - uses: actions/upload-artifact@v3
         name: Upload carla-python-api
@@ -94,13 +68,13 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: carla-package
-          path: /tmp
+          path: artifacts
 
       - name: debug
-        run: ls -la /tmp
+        run: ls -la artifacts
         
       - name: Extract artifact
-        run: tar -xvzf /tmp/carla-package.tar.gz -C /build
+        run: tar -xvzf artifacts/*.tar.gz -C /build
 
       - uses: docker/build-push-action@v5
         name: Build and push
