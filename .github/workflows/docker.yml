@@ -17,7 +17,7 @@ jobs:
         with:
           image: cgellerac/carla-source
           path: home/carla/carla/Dist
-          destination: /tmp/
+          destination: artifacts/
 
       - name: test1
         run: pwd
@@ -38,7 +38,7 @@ jobs:
         with:
           image: cgellerac/carla-source
           path: home/carla/carla/PythonAPI
-          destination: /tmp/
+          destination: artifacts/
 
       - name: test5
         run: pwd
@@ -58,13 +58,13 @@ jobs:
         name: Upload carla-package
         with:
           name: carla-package
-          path: ${{ steps.extract_carla_package.outputs.destination }}
+          path: artifacts/Dist
 
       - uses: actions/upload-artifact@v3
         name: Upload carla-python-api
         with:
           name: carla-python-api
-          path: ${{ steps.extract_python_api.outputs.destination }}
+          path: artifacts/PythonAPI
 
       # provide release
       - uses: ncipollo/release-action@v1
@@ -74,7 +74,7 @@ jobs:
           allowUpdates: true
           tag: ${{ github.ref_name }}
           commit: ${{ github.sha }}
-          artifacts: "${{ steps.extract_python_api.outputs.destination }}"
+          artifacts: artifacts/PythonAPI
           token: ${{ secrets.PAT }}
 
   # create and push carla image
