@@ -27,7 +27,7 @@ jobs:
         run: ls -la artifacts
         
       - name: Extract artifact
-        run: mkdir build && tar -xvzf artifacts/*.tar.gz -C build
+        run: rm -rf build && mkdir build && tar -xvzf artifacts/*.tar.gz -C build
 
       - name: debug3
         run: ls -la build
