@@ -66,6 +66,9 @@ jobs:
           path: home/carla/carla/Dist
           destination: artifacts/
 
+      - name: Keep only .tar.gz archive 
+        run: rm -rf artifacts/Dist/CARLA_Shipping_*
+
       #- uses: actions/upload-artifact@v3
       #  name: Upload carla-package
       #  with:
@@ -118,7 +121,7 @@ jobs:
       #    path: artifacts
 
       - name: Extract artifact
-        run: tar -xvzf artifacts/*.tar.gz -C build
+        run: tar -xvzf artifacts/Dist/*.tar.gz -C build
 
       - uses: docker/build-push-action@v5
         name: Build and push
