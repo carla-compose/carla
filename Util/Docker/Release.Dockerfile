@@ -4,7 +4,6 @@
 # sudo -E docker run --rm --gpus all -it --net=host carla:latest /bin/bash
 
 FROM nvidia/vulkan:1.1.121-cuda-10.1--ubuntu18.04 
-# TODO: Change to 22.04
 
 RUN apt-key adv --fetch-keys "https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub"
 

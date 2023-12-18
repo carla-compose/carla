@@ -1,13 +1,10 @@
 FROM nvidia/cuda:11.3.1-runtime-ubuntu20.04 
-# TODO: Change to 22.04
 
 USER root
 
 ARG EPIC_USER=user
 ARG EPIC_PASS=pass
 ENV DEBIAN_FRONTEND=noninteractive
-
-# Install dependencies
 RUN apt-get update ; \
   apt-get install -y wget software-properties-common && \
   add-apt-repository ppa:ubuntu-toolchain-r/test && \
