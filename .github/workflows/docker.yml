@@ -66,9 +66,6 @@ jobs:
           path: home/carla/carla/Dist
           destination: artifacts/
 
-      - name: Keep only .tar.gz archive 
-        run: rm -rf artifacts/Dist/CARLA_Shipping_*
-
       #- uses: actions/upload-artifact@v3
       #  name: Upload carla-package
       #  with:

@@ -18,4 +18,4 @@ RUN make PythonAPI ARGS="--python-version='3.10'"
 
 RUN make build.utils
 
-RUN make package
+RUN make package ARGS="--clean-intermediate"
