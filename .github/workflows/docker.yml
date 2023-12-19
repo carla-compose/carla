@@ -120,7 +120,7 @@ jobs:
       #    path: artifacts
 
       - name: Extract artifact
-        run: tar -xvzf artifacts/Dist/*.tar.gz -C build
+        run: mkdir build && tar -xvzf artifacts/Dist/*.tar.gz -C build
 
       - uses: docker/build-push-action@v5
         name: Build and push
