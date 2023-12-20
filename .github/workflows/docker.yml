@@ -68,12 +68,6 @@ jobs:
           path: home/carla/carla/Dist
           destination: artifacts/
 
-      #- uses: actions/upload-artifact@v3
-      #  name: Upload carla-package
-      #  with:
-      #    name: carla-package
-      #    path: artifacts/Dist
-
       # provide carla-python-api
       - uses: shrink/actions-docker-extract@v3
         name: Extract carla-python-api
@@ -82,13 +76,12 @@ jobs:
           image: cgellerac/carla-source
           path: home/carla/carla/PythonAPI
           destination: artifacts/
-
-      #- uses: actions/upload-artifact@v3
-      #  name: Upload carla-python-api
-      #  with:
-      #    name: carla-python-api
-      #    path: artifacts/PythonAPI
-
+      
+      # create archive for release
+      - name: Create archive
+        if: startsWith(github.ref, 'refs/tags')
+        run: tar -czvf artifacts/PythonAPI.tar.gz artifacts/PythonAPI
+      
       # provide release
       - uses: ncipollo/release-action@v1
         name: Create Release
@@ -97,7 +90,7 @@ jobs:
           allowUpdates: true
           tag: ${{ github.ref_name }}
           commit: ${{ github.sha }}
-          artifacts: artifacts/PythonAPI
+          artifacts: artifacts/PythonAPI.tar.gz
           token: ${{ secrets.PAT }}
           
   # create and push carla image
@@ -113,12 +106,6 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           
-      #- name: Download carla-package
-      #  uses: actions/download-artifact@v3
-      #  with:
-      #    name: carla-package
-      #    path: artifacts
-
       - name: Extract artifact
         run: mkdir build && tar -xvzf artifacts/Dist/*.tar.gz -C build
 
