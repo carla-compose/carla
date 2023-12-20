@@ -107,7 +107,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           
       - name: Extract artifact
-        run: mkdir build && tar -xvzf artifacts/Dist/*.tar.gz -C build
+        run: mkdir -p build && tar -xvzf artifacts/Dist/*.tar.gz -C build
 
       - uses: docker/build-push-action@v5
         name: Build and push
