@@ -4,6 +4,7 @@ on: [push, pull_request]
 
 jobs:
 
+  # clean up
   clean-up:
     name: Clean up
     runs-on: self-hosted
