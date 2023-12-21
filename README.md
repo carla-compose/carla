@@ -1,5 +1,18 @@
-CARLA Simulator
-===============
+# Simulation Core: *carla-simulator*
+
+<p align="center">
+<img src="https://img.shields.io/github/v/release/carla-compose/carla-simulator"/></a>
+  <img src="https://img.shields.io/github/license/carla-compose/carla-simulator"/>
+  <a href="https://github.com/carla-compose/carla-simulator/actions/workflows/docker.yml"><img src="https://github.com/carla-compose/carla-simulator/actions/workflows/docker.yml/badge.svg"/></a>
+  <img src="https://img.shields.io/badge/CARLA-0.9.15-blueviolet"/>
+  <img src="https://img.shields.io/github/stars/carla-compose/carla-simulator?style=social"/>
+</p>
+
+We recommend to use the *carla-simulator* as **simulation core** within our proposed simulation framework <a href="https://github.com/carla-compose/carla-compose"><img src="https://img.shields.io/github/stars/carla-compose/carla-compose?style=social"/></a>.
+
+---
+---
+## Original README
 
 [![Build Status](https://travis-ci.org/carla-simulator/carla.svg?branch=master)](https://travis-ci.org/carla-simulator/carla)
 [![Documentation](https://readthedocs.org/projects/carla/badge/?version=latest)](http://carla.readthedocs.io)
