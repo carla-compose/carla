@@ -17,7 +17,7 @@ jobs:
   create-carla-prerequisites-image:
     name: Create carla-prerequisites image
     runs-on: self-hosted
-    needs: clean-up
+    needs: create-vulkan-base-image
     steps:
 
       - uses: docker/build-push-action@v5
