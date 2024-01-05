@@ -112,6 +112,7 @@ jobs:
           build-args: |
             BASE_DIST=ubuntu22.04
             CUDA_VERSION=12.2.0
+          context: Util/Docker/vulkan-base
           
   # create and push carla image
   create-carla-image:
