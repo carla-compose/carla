@@ -13,6 +13,7 @@ import os
 import sys
 
 try:
+    os.chdir(os.path.dirname(__file__))
     sys.path.append(glob.glob('../carla/dist/carla-*%d.%d-%s.egg' % (
         sys.version_info.major,
         sys.version_info.minor,
