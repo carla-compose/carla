@@ -102,11 +102,6 @@ jobs:
     runs-on: self-hosted
     needs: provide-artifacts
     steps:
-      
-      - uses: actions/checkout@v3
-        name: Checkout repository
-        with:
-          submodules: true
 
       - uses: docker/build-push-action@v5
         name: Build image
