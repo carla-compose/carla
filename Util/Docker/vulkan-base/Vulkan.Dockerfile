@@ -1,4 +1,4 @@
-# custom Dockerfile for the release base image (based off of discontinued https://gitlab.com/nvidia/container-images/vulkan )
+# Custom Dockerfile for the release base image (based off of discontinued https://gitlab.com/nvidia/container-images/vulkan )
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG BASE_DIST=ubuntu22.04
@@ -20,13 +20,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Vulkan SDK
+# You can set VULKAN_SDK_VERSION as latest via build-arg=`curl https://vulkan.lunarg.com/sdk/latest/linux.txt`
 ARG VULKAN_SDK_VERSION=1.3.268.0
-#set VULKAN_SDK_VERSION as latest via build-arg=`curl https://vulkan.lunarg.com/sdk/latest/linux.txt`
-ARG VULKAN_SDK_VERSION
+ARG VULKAN_API_VERSION=1.3.268
 # Download the Vulkan SDK and extract the headers, loaders, layers and binary utilities
 RUN wget -q --show-progress \
     --progress=bar:force:noscroll \
-    https://sdk.lunarg.com/sdk/download/latest/linux/vulkan_sdk.tar.gz \
+    https://sdk.lunarg.com/sdk/download/${VULKAN_SDK_VERSION}/linux/vulkansdk-linux-x86_64-${VULKAN_SDK_VERSION}.tar.xz \
     -O /tmp/vulkansdk-linux-x86_64-${VULKAN_SDK_VERSION}.tar.gz \ 
     && echo "Installing Vulkan SDK ${VULKAN_SDK_VERSION}" \
     && mkdir -p /opt/vulkan \
@@ -42,8 +42,14 @@ RUN wget -q --show-progress \
     && ldconfig \
     && rm /tmp/vulkansdk-linux-x86_64-${VULKAN_SDK_VERSION}.tar.gz && rm -rf /opt/vulkan
 
-# Copy in Nvidia driver config
-COPY nvidia_icd.json /etc/vulkan/icd.d/nvidia_icd.json
+# Generate Nvidia driver config
+RUN echo "{" > /etc/vulkan/icd.d/nvidia_icd.json; \
+    echo "    \"file_format_version\" : \"1.0.0\"," >> /etc/vulkan/icd.d/nvidia_icd.json; \
+    echo "    \"ICD\": {" >> /etc/vulkan/icd.d/nvidia_icd.json; \
+    echo "        \"library_path\": \"libGLX_nvidia.so.0\"," >> /etc/vulkan/icd.d/nvidia_icd.json; \
+    echo "        \"api_version\" : \"${VULKAN_API_VERSION}\"" >> /etc/vulkan/icd.d/nvidia_icd.json; \
+    echo "    }" >> /etc/vulkan/icd.d/nvidia_icd.json; \
+    echo "}" >> /etc/vulkan/icd.d/nvidia_icd.json
 
 # Setup the required capabilities for the container runtime    
 ENV NVIDIA_DRIVER_CAPABILITIES compute,graphics,utility

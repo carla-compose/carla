@@ -14,6 +14,15 @@ COPY --chown=carla:carla . /home/carla
 USER carla
 WORKDIR /home/carla
 
+# Create env setup script to make CARLA PythonAPI easily accessible (needs interactive shell!)
+ARG CARLA_PYAPI_PATH=/home/carla/PythonAPI
+ENV CARLA_PYAPI_PATH=${CARLA_PYAPI_PATH}
+
+RUN echo "export PYTHONPATH=\$PYTHONPATH:$CARLA_PYAPI_PATH/carla/dist/$(ls $CARLA_PYAPI_PATH/carla/dist | grep .egg)" >> $CARLA_PYAPI_PATH/setup_env.sh; \
+    echo "export PYTHONPATH=\$PYTHONPATH:$CARLA_PYAPI_PATH/carla/agents" >> $CARLA_PYAPI_PATH/setup_env.sh; \
+    echo "export PYTHONPATH=\$PYTHONPATH:$CARLA_PYAPI_PATH/carla" >> $CARLA_PYAPI_PATH/setup_env.sh; \
+    echo "source $CARLA_PYAPI_PATH/setup_env.sh" >> /etc/bash.bashrc
+
 # you can also run CARLA in offscreen mode with -RenderOffScreen
 # CMD /bin/bash CarlaUE4.sh -RenderOffScreen
 CMD /bin/bash CarlaUE4.sh
