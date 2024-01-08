@@ -43,7 +43,8 @@ RUN wget -q --show-progress \
     && rm /tmp/vulkansdk-linux-x86_64-${VULKAN_SDK_VERSION}.tar.gz && rm -rf /opt/vulkan
 
 # Generate Nvidia driver config
-RUN echo "{" > /etc/vulkan/icd.d/nvidia_icd.json; \
+RUN mkdir -p /etc/vulkan/icd.d && \
+    echo "{" > /etc/vulkan/icd.d/nvidia_icd.json; \
     echo "    \"file_format_version\" : \"1.0.0\"," >> /etc/vulkan/icd.d/nvidia_icd.json; \
     echo "    \"ICD\": {" >> /etc/vulkan/icd.d/nvidia_icd.json; \
     echo "        \"library_path\": \"libGLX_nvidia.so.0\"," >> /etc/vulkan/icd.d/nvidia_icd.json; \
