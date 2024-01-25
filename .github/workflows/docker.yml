@@ -7,7 +7,7 @@ jobs:
   # clean up
   clean-up:
     name: Clean up
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
 
       - name: Clean up
@@ -16,7 +16,7 @@ jobs:
   # create carla-prerequisites image
   create-carla-prerequisites-image:
     name: Create carla-prerequisites image
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: clean-up
     steps:
 
@@ -33,7 +33,7 @@ jobs:
   # create and push carla-source image
   create-carla-source-image:
     name: Create carla-source image
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: create-carla-prerequisites-image
     steps:
       - uses: actions/checkout@v3
@@ -53,13 +53,13 @@ jobs:
           file: Util/Docker/Carla.Dockerfile
           tags: cgellerac/carla-simulator:source
           no-cache: true
-          push: true
+          push: true # TODO set to false for rwthika
           context: .
           
   # provide artifacts and releases
   provide-artifacts:
     name: Provide carla artifacts
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: create-carla-source-image
     steps:
 
@@ -99,7 +99,7 @@ jobs:
   # create vulkan-base for carla release
   create-vulkan-base-image:
     name: Create vulkan-base image
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: provide-artifacts
     steps:
 
@@ -117,8 +117,8 @@ jobs:
   # create and push carla image
   create-carla-image:
     name: Create carla image
-    runs-on: self-hosted
-    needs: [create-vulkan-base-image]
+    runs-on: ubuntu-latest
+    needs: create-vulkan-base-image
     steps:
     
       - uses: docker/login-action@v3
