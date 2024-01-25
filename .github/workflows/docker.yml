@@ -7,7 +7,7 @@ jobs:
   # clean up
   clean-up:
     name: Clean up
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
 
       - name: Clean up
@@ -16,7 +16,7 @@ jobs:
   # create carla-prerequisites image
   create-carla-prerequisites-image:
     name: Create carla-prerequisites image
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: clean-up
     steps:
 
@@ -33,7 +33,7 @@ jobs:
   # create and push carla-source image
   create-carla-source-image:
     name: Create carla-source image
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: create-carla-prerequisites-image
     steps:
       - uses: actions/checkout@v3
@@ -59,7 +59,7 @@ jobs:
   # provide artifacts and releases
   provide-artifacts:
     name: Provide carla artifacts
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: create-carla-source-image
     steps:
 
@@ -99,7 +99,7 @@ jobs:
   # create vulkan-base for carla release
   create-vulkan-base-image:
     name: Create vulkan-base image
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: provide-artifacts
     steps:
 
@@ -117,7 +117,7 @@ jobs:
   # create and push carla image
   create-carla-image:
     name: Create carla image
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: create-vulkan-base-image
     steps:
     
