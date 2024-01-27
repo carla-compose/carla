@@ -51,7 +51,7 @@ jobs:
         name: Build and push image
         with:
           file: Util/Docker/Carla.Dockerfile
-          tags: cgellerac/carla-simulator:source
+          tags: rwthika/carla-simulator:source
           no-cache: true
           push: true # TODO set to false for rwthika
           context: .
@@ -67,7 +67,7 @@ jobs:
       - uses: shrink/actions-docker-extract@v3
         name: Extract carla-package
         with:
-          image: cgellerac/carla-simulator:source
+          image: rwthika/carla-simulator:source
           path: home/carla/carla/Dist
           destination: artifacts/
 
@@ -76,7 +76,7 @@ jobs:
         name: Extract carla-python-api
         id: extract_python_api
         with:
-          image: cgellerac/carla-simulator:source
+          image: rwthika/carla-simulator:source
           path: home/carla/carla/PythonAPI
           destination: artifacts/
       
@@ -134,7 +134,7 @@ jobs:
         name: Build and push
         with:
           file: build/Dockerfile
-          tags: cgellerac/carla-simulator
+          tags: rwthika/carla-simulator
           no-cache: true
           context: build
           push: true  
