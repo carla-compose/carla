@@ -13,10 +13,12 @@
 > [!IMPORTANT]
 > This repository is a minimal fork of the official [carla-simulator](https://github.com/carla-simulator/carla)! All modifications to the original repository are documented in [FEATURES.md](./FEATURES.md).
 
-> [!RECOMMENDATION]
-> We recommend to use the *carla-simulator* as **simulation core** in our open, modular and scalable simulation framework <a href="https://github.com/ika-rwth-aachen/carlos">**CARLOS**. <img src="https://img.shields.io/github/stars/ika-rwth-aachen/carlos?style=social"/></a> Here, it constitutes the central element of a simulation and handles all graphical and dynamic calculations in the individual simulation time steps.
+> [!TIP]
+> We recommend to use the *carla-simulator* as **simulation core** in our open, modular and scalable simulation framework <a href="https://github.com/ika-rwth-aachen/carlos">**CARLOS**. <img src="https://img.shields.io/github/stars/ika-rwth-aachen/carlos?style=social"/></a> 
+> Here, it constitutes the central element of a simulation and handles all graphical and dynamic calculations in the individual simulation time steps.
 
-**Note**: We set up a Continous Integration (CI) pipeline as [GitHub action](./github/workflows/docker.yml) to continously build Docker images for the `carla-simulator`, publicly available on [Docker Hub](https://hub.docker.com/r/rwthika/carla-simulator).
+> [!NOTE]
+> We set up a Continous Integration (CI) pipeline as [GitHub action](./github/workflows/docker.yml) to continously build Docker images for the `carla-simulator`, publicly available on [Docker Hub](https://hub.docker.com/r/rwthika/carla-simulator).
 
 ---
 ---
