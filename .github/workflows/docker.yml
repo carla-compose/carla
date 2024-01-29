@@ -18,7 +18,7 @@ jobs:
 
       - name: Set image tag
         run: |
-          echo "IMAGE_TAG_SUFFIX=_$(echo '${{ github.ref_name }}' | sed '/\//-/g')_ci" >> $GITHUB_ENV
+          echo "IMAGE_TAG_SUFFIX=_$(echo '${{ github.ref_name }}' | tr / -)_ci" >> $GITHUB_ENV
         if: github.ref.name != github.event.repository.default_branch
       
         
