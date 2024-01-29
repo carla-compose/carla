@@ -2,16 +2,25 @@ name: Docker
 
 on: [push, pull_request]
 
+env: 
+  IMAGE_TAG_SUFFIX: ""
+
 jobs:
 
-  # clean up
-  clean-up:
-    name: Clean up
+  # set up
+  set-up:
+    name: Set up
     runs-on: self-hosted
     steps:
 
       - name: Clean up
         run: rm -rf *
+
+      - name: Set image tag
+        run: |
+          echo "IMAGE_TAG_SUFFIX=_${{ github.ref_name }}_ci" >> $GITHUB_ENV
+        if: github.ref.name != github.event.repository.default_branch
+      
         
   # create carla-prerequisites image
   create-carla-prerequisites-image:
@@ -51,9 +60,9 @@ jobs:
         name: Build and push image
         with:
           file: Util/Docker/Carla.Dockerfile
-          tags: rwthika/carla-simulator:source
+          tags: rwthika/carla-simulator:source${{env.IMAGE_TAG_SUFFIX}}
           no-cache: true
-          push: true # TODO set to false for rwthika
+          push: true
           context: .
           
   # provide artifacts and releases
@@ -62,12 +71,12 @@ jobs:
     runs-on: self-hosted
     needs: create-carla-source-image
     steps:
-
+  
       # provide carla-package
       - uses: shrink/actions-docker-extract@v3
         name: Extract carla-package
         with:
-          image: rwthika/carla-simulator:source
+          image: rwthika/carla-simulator:source${{env.IMAGE_TAG_SUFFIX}}
           path: home/carla/carla/Dist
           destination: artifacts/
 
@@ -76,7 +85,7 @@ jobs:
         name: Extract carla-python-api
         id: extract_python_api
         with:
-          image: rwthika/carla-simulator:source
+          image: rwthika/carla-simulator:source${{env.IMAGE_TAG_SUFFIX}}
           path: home/carla/carla/PythonAPI
           destination: artifacts/
       
@@ -134,7 +143,7 @@ jobs:
         name: Build and push
         with:
           file: build/Dockerfile
-          tags: rwthika/carla-simulator
+          tags: rwthika/carla-simulator:latest${{env.IMAGE_TAG_SUFFIX}}
           no-cache: true
           context: build
           push: true  
