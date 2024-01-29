@@ -62,7 +62,7 @@ jobs:
           file: Util/Docker/Carla.Dockerfile
           tags: rwthika/carla-simulator:source${{env.IMAGE_TAG_SUFFIX}}
           no-cache: true
-          push: true
+          push: false
           context: .
           
   # provide artifacts and releases
