@@ -2,31 +2,22 @@ name: Docker
 
 on: [push, pull_request]
 
-env: 
-  IMAGE_TAG_SUFFIX: ""
-
 jobs:
 
   # set up
-  set-up:
-    name: Set up
+  clean-up:
+    name: Clean up
     runs-on: self-hosted
     steps:
 
       - name: Clean up
         run: rm -rf *
-
-      - name: Set image tag
-        run: |
-          echo "IMAGE_TAG_SUFFIX=_$(echo '${{ github.ref_name }}' | tr / -)_ci" >> $GITHUB_ENV
-        if: github.ref.name != github.event.repository.default_branch
-      
         
   # create carla-prerequisites image
   create-carla-prerequisites-image:
     name: Create carla-prerequisites image
     runs-on: self-hosted
-    needs: set-up
+    needs: clean-up
     steps:
 
       - uses: docker/build-push-action@v5
@@ -44,7 +35,16 @@ jobs:
     name: Create carla-source image
     runs-on: self-hosted
     needs: create-carla-prerequisites-image
+    env:
+      IMAGE_TAG_SUFFIX: ""
+      
     steps:
+    
+     - name: Set image tag
+        run: |
+          echo "IMAGE_TAG_SUFFIX=_$(echo '${{ github.ref_name }}' | tr / -)_ci" >> $GITHUB_ENV
+        if: github.ref.name != github.event.repository.default_branch
+        
       - uses: actions/checkout@v3
         name: Checkout repository
         with:
@@ -70,7 +70,15 @@ jobs:
     name: Provide carla artifacts
     runs-on: self-hosted
     needs: create-carla-source-image
+    env:
+      IMAGE_TAG_SUFFIX: ""
+      
     steps:
+    
+     - name: Set image tag
+        run: |
+          echo "IMAGE_TAG_SUFFIX=_$(echo '${{ github.ref_name }}' | tr / -)_ci" >> $GITHUB_ENV
+        if: github.ref.name != github.event.repository.default_branch
   
       # provide carla-package
       - uses: shrink/actions-docker-extract@v3
@@ -128,7 +136,14 @@ jobs:
     name: Create carla image
     runs-on: self-hosted
     needs: create-vulkan-base-image
+    env:
+      IMAGE_TAG_SUFFIX: ""
+      
     steps:
+     - name: Set image tag
+        run: |
+          echo "IMAGE_TAG_SUFFIX=_$(echo '${{ github.ref_name }}' | tr / -)_ci" >> $GITHUB_ENV
+        if: github.ref.name != github.event.repository.default_branch
     
       - uses: docker/login-action@v3
         name: Login to Docker Hub
