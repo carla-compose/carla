@@ -23,6 +23,9 @@ RUN echo "export PYTHONPATH=\$PYTHONPATH:$CARLA_PYAPI_PATH/carla/dist/$(ls $CARL
 USER carla
 WORKDIR /home/carla
 
+HEALTHCHECK --interval=5s --timeout=5s --start-period=10s --retries=3 \
+  CMD python3 ./PythonAPI/util/ping.py
+
 # you can also run CARLA in offscreen mode with -RenderOffScreen
 # CMD /bin/bash CarlaUE4.sh -RenderOffScreen
 CMD /bin/bash CarlaUE4.sh
