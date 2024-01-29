@@ -1,13 +1,13 @@
 # Simulation Core: *carla-simulator*
 
 <p align="left">
-  <img src="https://img.shields.io/github/v/release/carla-compose/carla-simulator"/>
-  <img src="https://img.shields.io/github/license/carla-compose/carla-simulator"/>
-  <a href="https://github.com/carla-compose/carla-simulator/actions/workflows/docker.yml">
-  <img src="https://github.com/carla-compose/carla-simulator/actions/workflows/docker.yml/badge.svg"/></a>
+  <img src="https://img.shields.io/github/v/release/ika-rwth-aachen/carla-simulator"/>
+  <img src="https://img.shields.io/github/license/ika-rwth-aachen/carla-simulator"/>
+  <a href="https://github.com/ika-rwth-aachen/carla-simulator/actions/workflows/docker.yml">
+  <img src="https://github.com/ika-rwth-aachen/carla-simulator/actions/workflows/docker.yml/badge.svg"/></a>
   <img src="https://img.shields.io/badge/CARLA-0.9.15-blueviolet"/>
   <img src="https://img.shields.io/badge/Python-3.10-blueviolet"/>
-  <img src="https://img.shields.io/github/stars/carla-compose/carla-simulator?style=social"/>
+  <img src="https://img.shields.io/github/stars/ika-rwth-aachen/carla-simulator?style=social"/>
 </p>
 
 > [!IMPORTANT]
@@ -15,6 +15,7 @@
 
 > [!TIP]
 > We recommend to use the *carla-simulator* as **simulation core** in our open, modular and scalable simulation framework <a href="https://github.com/ika-rwth-aachen/carlos">**CARLOS**. <img src="https://img.shields.io/github/stars/ika-rwth-aachen/carlos?style=social"/></a> 
+>
 > Here, it constitutes the central element of a simulation and handles all graphical and dynamic calculations in the individual simulation time steps.
 
 > [!NOTE]
