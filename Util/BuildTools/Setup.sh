@@ -97,7 +97,7 @@ for PY_VERSION in ${PY_VERSION_LIST[@]} ; do
       log "Using boost backup"
       wget "https://carla-releases.s3.eu-west-3.amazonaws.com/Backup/${BOOST_PACKAGE_BASENAME}.tar.gz" || true
     fi
-    
+
     log "Extracting boost for Python ${PY_VERSION}."
     tar -xzf ${BOOST_PACKAGE_BASENAME}.tar.gz
     mkdir -p ${BOOST_BASENAME}-install/include
