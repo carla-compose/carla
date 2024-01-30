@@ -91,10 +91,12 @@ for PY_VERSION in ${PY_VERSION_LIST[@]} ; do
     BOOST_PACKAGE_BASENAME=boost_${BOOST_VERSION//./_}
 
     log "Retrieving boost."
-    
-    # use boost backup instead of official release due to required verification
-    log "Using boost backup from aws carla-releases"
-    wget "https://carla-releases.s3.eu-west-3.amazonaws.com/Backup/${BOOST_PACKAGE_BASENAME}.tar.gz" || true
+    wget "https://boostorg.jfrog.io/artifactory/main/release/${BOOST_VERSION}/source/${BOOST_PACKAGE_BASENAME}.tar.gz" || true
+    # try to use the backup boost we have in Jenkins
+    if [[ ! -f "${BOOST_PACKAGE_BASENAME}.tar.gz" ]] ; then
+      log "Using boost backup"
+      wget "https://carla-releases.s3.eu-west-3.amazonaws.com/Backup/${BOOST_PACKAGE_BASENAME}.tar.gz" || true
+    fi
     
     log "Extracting boost for Python ${PY_VERSION}."
     tar -xzf ${BOOST_PACKAGE_BASENAME}.tar.gz
