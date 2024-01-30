@@ -12,18 +12,22 @@ if [ -f "${FBX2OBJ_DIST}/FBX2OBJ" ]; then
   exit
 fi
 
-LIB_NAME=fbx202034_fbxsdk_linux
-FBXSDK_URL=https://rwth-aachen.sciebo.de/s/z4KgTOD39v4I8Qw/download # Private Sciebo
+LIB_NAME=fbx202001_fbxsdk_linux
+FBXSDK_URL=https://www.autodesk.com/content/dam/autodesk/www/adn/fbx/2020-0-1/${LIB_NAME}.tar.gz
 
 if [ ! -d "${FBX2OBJ_DEP_FOLDER}" ]; then
   log "Downloading FBX SDK..."
-  wget -O "${CARLA_DOCKER_UTILS_FOLDER}/${LIB_NAME}.zip" "${FBXSDK_URL}"
+  wget -c "${FBXSDK_URL}" -P "${CARLA_DOCKER_UTILS_FOLDER}" --user-agent="Mozilla"
 
   echo "Unpacking..."
   mkdir -p "${FBX2OBJ_DEP_FOLDER}"
-  unzip "${CARLA_DOCKER_UTILS_FOLDER}/${LIB_NAME}.zip" -d "${FBX2OBJ_DEP_FOLDER}"
-  rm "${CARLA_DOCKER_UTILS_FOLDER}/${LIB_NAME}.zip"
+  tar -xvzf "${CARLA_DOCKER_UTILS_FOLDER}/${LIB_NAME}.tar.gz" -C "${CARLA_DOCKER_UTILS_FOLDER}" "${LIB_NAME}"
+  rm "${CARLA_DOCKER_UTILS_FOLDER}/${LIB_NAME}.tar.gz"
 
+  echo "Installing FBX SDK..."
+  echo -e "y\nyes\nn\n" | "${CARLA_DOCKER_UTILS_FOLDER}/${LIB_NAME}" "${FBX2OBJ_DEP_FOLDER}"
+  echo
+  rm "${CARLA_DOCKER_UTILS_FOLDER}/${LIB_NAME}"
 fi
 
 log "Compiling FBX2OBJ..."
