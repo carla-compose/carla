@@ -58,13 +58,15 @@ function download_content {
   fi
   mkdir -p "$CONTENT_FOLDER"
   mkdir -p Content
-  if hash aria2c 2>/dev/null; then
-    echo -e "${CONTENT_LINK}\n\tout=Content.tar.gz" > .aria2c.input
-    aria2c -j16 -x16 --input-file=.aria2c.input
-    rm -f .aria2c.input
-  else
+  
+  #if hash aria2c 2>/dev/null; then
+  #  echo -e "${CONTENT_LINK}\n\tout=Content.tar.gz" > .aria2c.input
+  #  aria2c -j16 -x16 --input-file=.aria2c.input
+  #  rm -f .aria2c.input
+  #else
     wget -c ${CONTENT_LINK} -O Content.tar.gz
-  fi
+  #fi
+  
   tar -xvzf Content.tar.gz -C Content
   rm Content.tar.gz
   mv Content/* "$CONTENT_FOLDER"

@@ -1,5 +1,29 @@
-CARLA Simulator
-===============
+# Simulation Core: *carla-simulator*
+
+<p align="left">
+  <img src="https://img.shields.io/github/v/release/ika-rwth-aachen/carla-simulator"/>
+  <img src="https://img.shields.io/github/license/ika-rwth-aachen/carla-simulator"/>
+  <a href="https://github.com/ika-rwth-aachen/carla-simulator/actions/workflows/docker.yml">
+  <img src="https://github.com/ika-rwth-aachen/carla-simulator/actions/workflows/docker.yml/badge.svg"/></a>
+  <img src="https://img.shields.io/badge/CARLA-0.9.15-blueviolet"/>
+  <img src="https://img.shields.io/badge/Python-3.10-blueviolet"/>
+  <img src="https://img.shields.io/github/stars/ika-rwth-aachen/carla-simulator?style=social"/>
+</p>
+
+> [!IMPORTANT]
+> This repository is a minimal fork of the official [carla-simulator](https://github.com/carla-simulator/carla)! All modifications to the original repository are documented in [CARLOS_CHANGELOG.md](./CARLOS_CHANGELOG.md).
+
+> [!TIP]
+> We recommend to use the *carla-simulator* as **simulation core** in our open, modular and scalable simulation framework <a href="https://github.com/ika-rwth-aachen/carlos">**CARLOS**. <img src="https://img.shields.io/github/stars/ika-rwth-aachen/carlos?style=social"/></a> 
+>
+> Here, it constitutes the central element of a simulation and handles all graphical and dynamic calculations in the individual simulation time steps.
+
+> [!NOTE]
+> We set up a Continous Integration (CI) pipeline as [GitHub workflow](./github/workflows/docker.yml) to continously build Docker images for the `carla-simulator`, publicly available on [Docker Hub](https://hub.docker.com/r/rwthika/carla-simulator).
+
+---
+---
+## Original README
 
 [![Build Status](https://travis-ci.org/carla-simulator/carla.svg?branch=master)](https://travis-ci.org/carla-simulator/carla)
 [![Documentation](https://readthedocs.org/projects/carla/badge/?version=latest)](http://carla.readthedocs.io)
