@@ -14,3 +14,4 @@
 
 *   Added `ping.py` script to PythonAPI to enable health checks
 *   Fix [aria2](https://aria2.github.io/) related issue
+*   Fix fbx sdk download by using `curl` instead of `wget`
