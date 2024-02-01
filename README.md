@@ -5,6 +5,7 @@
   <img src="https://img.shields.io/github/license/ika-rwth-aachen/carla-simulator"/>
   <a href="https://github.com/ika-rwth-aachen/carla-simulator/actions/workflows/docker.yml">
   <img src="https://github.com/ika-rwth-aachen/carla-simulator/actions/workflows/docker.yml/badge.svg"/></a>
+  <img src="https://img.shields.io/badge/Ubuntu-22.04-E95420"/>
   <img src="https://img.shields.io/badge/CARLA-0.9.15-blueviolet"/>
   <img src="https://img.shields.io/badge/Python-3.10-blueviolet"/>
   <img src="https://img.shields.io/github/stars/ika-rwth-aachen/carla-simulator?style=social"/>
