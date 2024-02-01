@@ -64,6 +64,7 @@ jobs:
           no-cache: true
           push: false
           context: .
+          push: true
           
   # provide artifacts and releases
   provide-artifacts:
