@@ -62,7 +62,6 @@ jobs:
           file: Util/Docker/Carla.Dockerfile
           tags: rwthika/carla-simulator:source${{env.IMAGE_TAG_SUFFIX}}
           no-cache: true
-          push: false
           context: .
           push: true
           
