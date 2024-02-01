@@ -143,6 +143,7 @@ jobs:
           build-args: |
             UBUNTU_VERSION=22.04
           context: .
+          push: true
 
   # create vulkan-base for carla server image
   create-vulkan-base-image:
