@@ -8,6 +8,7 @@
 *   Update to Ubuntu 22.04 and Python 3.10 for prerequisites image
 *   Update to Ubuntu 22.04 and Python 3.10 for release image
 *   Created `vulkan-base` Dockerfile to replace discontinued `nvidia/vulkan` images used for the release image
+*   Created `client` Dockerfile to provide PythonAPI client image
 *   Added health check to release image
 
 ### Minor changes
